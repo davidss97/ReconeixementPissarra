@@ -20,7 +20,7 @@ function dtanh(x) {
 
 function muta(x) {
     if (Math.random() < 0.95){
-        return x + gauss()*0,5;
+        return x + gauss()*0.5;
     }else{
         return x;
     }
@@ -36,6 +36,7 @@ function NeuralNetwork(inp, hid, out, ritme=0.1, act=sigmoid){
     this.who.aleatoritza();
     this.ritme = ritme;
     this.act = act;
+
     if (act == sigmoid){
         this.dact = dsigmoid;
     }else{
@@ -59,8 +60,8 @@ function NeuralNetwork(inp, hid, out, ritme=0.1, act=sigmoid){
         let err = targets - outputs;
         let hid_err = prod(this.who.tr(), err);
 
-        let grad_output = (map(outputs, this.dact)*hid_err)*this.ritme;
-        let grad_hidout = map(hid_outputs, this.dact)*hid_err*this.ritme;
+        let grad_output = map(outputs, this.dact).mul(hid_err).mul(this.ritme);
+        let grad_hidout = map(hid_outputs, this.dact).mul(hid_err).mul(this.ritme);
 
         this.who += prod(grad_output, hid_outputs.tr());
         this.wih += prod(grad_hidout, inputs.tr());
@@ -77,5 +78,5 @@ function NeuralNetwork(inp, hid, out, ritme=0.1, act=sigmoid){
 }
 
 for (var i = 0; i <= 100; i++){
-    console.log("wola");
+    console.log(dtanh(i));
 }
