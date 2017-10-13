@@ -77,5 +77,5 @@ function NeuralNetwork(inp, hid, out, ritme=0.1, act=sigmoid){
 }
 
 for (var i = 0; i <= 100; i++){
-    console.log(gauss());
+    console.log("wola");
 }
